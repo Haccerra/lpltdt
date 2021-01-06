@@ -1,0 +1,11 @@
+BEGIN TEST DATA BLOCK
+	image_license_plate_path=/serbia/AC/plt1.png
+	image_vehicle_plate_path=/serbia/AC/car1.jpg
+	image_license_plate_text=AC:025:OP
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_license_plate_path=/serbia/AC/plt2.png
+	image_vehicle_plate_path=/serbia/AC/car2.jpg
+	image_license_plate_text=AC:020:SN
+END TEST DATA BLOCK
