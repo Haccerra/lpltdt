@@ -29,4 +29,7 @@ make
 sudo make install
 
 # Remove library data created during installation process.
+cd ..	# exit build directory
+cd ..	# exit src directory
+cd ..	# exit openalpr directory
 rm -rf openalpr
