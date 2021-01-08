@@ -45,7 +45,7 @@ class DBTestdataParser:
 		# END TEST DATA BLOCK
 		try:
 			# Open database to be parsed.
-			with open (self.dblocation, "r") as filehandler:
+			with open (self.program_absolute_path + self.dblocation, "r") as filehandler:
 				temporary_data = []	# store parsing results.
 
 				for fhline in filehandler:
@@ -71,10 +71,10 @@ class DBTestdataParser:
 						carimage, pltimage, lplttext = temporary_data
 
 						# Add the temporary stored data to object attribute.
-						self.dbinformation.append ([							\
-										(self.program_absolute_path + carimage),	\
-										(self.program_absolute_path + pltimage),	\
-										(lplttext)					\
+						self.dbinformation.append ([			\
+										carimage,	\
+										pltimage,	\
+										lplttext	\
 									  ])
 
 						# Free memory and reinstantialise the empty list.

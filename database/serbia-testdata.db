@@ -1,11 +1,191 @@
+#AC
 BEGIN TEST DATA BLOCK
-	image_license_plate_path=/serbia/AC/plt1.png
 	image_vehicle_plate_path=/serbia/AC/car1.jpg
+	image_license_plate_path=/serbia/AC/plt1.png
 	image_license_plate_text=AC025OP
 END TEST DATA BLOCK
 
 BEGIN TEST DATA BLOCK
-	image_license_plate_path=/serbia/AC/plt2.png
 	image_vehicle_plate_path=/serbia/AC/car2.jpg
+	image_license_plate_path=/serbia/AC/plt2.png
 	image_license_plate_text=AC020SN
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AC/car3.jpg
+	image_license_plate_path=/serbia/AC/plt3.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AC/car4.jpg
+	image_license_plate_path=/serbia/AC/plt4.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+
+
+
+#AL
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AL/car1.jpg
+	image_license_plate_path=/serbia/AL/plt1.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AL/car2.jpg
+	image_license_plate_path=/serbia/AL/plt2.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AL/car3.jpg
+	image_license_plate_path=/serbia/AL/plt3.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AL/car4.jpg
+	image_license_plate_path=/serbia/AL/plt4.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AL/car5.jpg
+	image_license_plate_path=/serbia/AL/plt5.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+
+
+
+#AR
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AR/car1.jpg
+	image_license_plate_path=/serbia/AR/plt1.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AR/car2.jpg
+	image_license_plate_path=/serbia/AR/plt2.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AR/car3.jpg
+	image_license_plate_path=/serbia/AR/plt3.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AR/car4.jpg
+	image_license_plate_path=/serbia/AR/plt4.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/AR/car5.jpg
+	image_license_plate_path=/serbia/AR/plt5.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+
+
+
+#BĆ
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BĆ/car1.jpg
+	image_license_plate_path=/serbia/BĆ/plt1.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BĆ/car2.jpg
+	image_license_plate_path=/serbia/BĆ/plt2.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BĆ/car3.jpg
+	image_license_plate_path=/serbia/BĆ/plt3.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+#BČ
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BČ/car1.jpg
+	image_license_plate_path=/serbia/BČ/plt1.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BČ/car2.jpg
+	image_license_plate_path=/serbia/BČ/plt2.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BČ/car3.jpg
+	image_license_plate_path=/serbia/BČ/plt3.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+
+
+
+#BG
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car1.jpg
+	image_license_plate_path=/serbia/BG/plt1.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car2.jpg
+	image_license_plate_path=/serbia/BG/plt2.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car3.jpg
+	image_license_plate_path=/serbia/BG/plt3.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car4.jpg
+	image_license_plate_path=/serbia/BG/plt4.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car5.jpg
+	image_license_plate_path=/serbia/BG/plt5.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car6.jpg
+	image_license_plate_path=/serbia/BG/plt6.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car7.jpg
+	image_license_plate_path=/serbia/BG/plt7.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car8.jpg
+	image_license_plate_path=/serbia/BG/plt8.png
+	image_license_plate_text=
+END TEST DATA BLOCK
+
+BEGIN TEST DATA BLOCK
+	image_vehicle_plate_path=/serbia/BG/car9.jpg
+	image_license_plate_path=/serbia/BG/plt9.png
+	image_license_plate_text=
 END TEST DATA BLOCK

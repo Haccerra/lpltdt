@@ -21,9 +21,8 @@ def controlflow(program_absolute_path, program_database_absolute_path, user_requ
 		pass
 
 	elif ("--test" == user_requested_mode):
-		dirTestdata = input ("Enter country: ")
-
-		testflow(program_database_absolute_path, dirTestdata+"-testdata.db")
+		country_testdata = input ("Enter country: ")
+		testflow(program_database_absolute_path, country_testdata+"-testdata.db")
 
 	elif ("--demo" == user_requested_mode):
 		demoflow()
