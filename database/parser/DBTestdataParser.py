@@ -108,3 +108,11 @@ class DBTestdataParser:
 		print (100*"*")
 		print ("")
 
+
+	# @Brief: Return parsed data obtained by read method.
+	# @Input: None
+	# @Retrn: self.dbinformation
+	# @Throw: None
+	def get_db_data(self):
+		return self.dbinformation
+

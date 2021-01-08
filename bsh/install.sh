@@ -28,8 +28,7 @@ make
 # Install library.
 sudo make install
 
-# Remove library data created during installation process.
-cd ..	# exit build directory
-cd ..	# exit src directory
-cd ..	# exit openalpr directory
-rm -rf openalpr
+# Install python binding.
+cd ..				# exit build directory
+cd bindings/python
+sudo python3 setup.py install

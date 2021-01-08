@@ -3,6 +3,7 @@
 
 # Library for connecting and executing commands by RPi camera module.
 import picamera
+import picamera.array
 import time
 import PIL   as Pillow
 import numpy as np
@@ -23,7 +24,7 @@ class CMM:
 	#	: FPS            - framerate in second case for recording_mode (video used).
 	#	: debug          - used for development purpose.
 	# @Throw:
-	def __init__ (self, tplResolution, image_rotation, recording_mode, capture_timer = 5, FPS = 5, debug = False):
+	def __init__ (self, tplResolution = (640, 480), image_rotation = 0, recording_mode = STILL_IMAGE_MODE, capture_timer = 5, FPS = 5, debug = False):
 
 		# Assign values to attributes.
 		self.camera = picamera.PiCamera()			# PiCamera object module.
@@ -92,14 +93,14 @@ class CMM:
 			time.sleep (0.25)	# 250ms.
 			
 			# Fetch the stored data from the camera module.
-			self.camera(rawdata, format = "bgr")	# BGR is legacy format of openCV library used by openALPR.
+			self.camera.capture(rawdata, format = "bgr")	# BGR is legacy format of openCV library used by openALPR.
 			image = rawdata.array
 
 			# Rotate the image if needed.
 			if (0 != self.image_rotation):
 				image = Pillow.Image.fromarray(np.asarray (image)).rotate(self.image_rotation, expand = True)
 
-			return [image]
+			return image
 
 		else:
 			raise ValueError ("DEV MESSAGE: Argument recording_mode of CMM class set to LIVE_IMAGE_MODE, but method capture_still_image was requested.")
@@ -111,12 +112,12 @@ class CMM:
 	# @Throw: VaueError - method called with improper recording_mode set.
 	def record_video(self):
 		# Method return value.
-		image_array = None
+		image_array = []
 
 		if (LIVE_IMAGE_MODE == self.recording_mode):
 
 			# Create rawdata object.
-			rawdata = PiRGBArray(self.camera, size = self.camera.resolution)
+			rawdata = picamera.array.PiRGBArray(self.camera, size = self.camera.resolution)
 			# Make small time window for camera to get ready.
 			time.sleep (0.25)	# 250ms.
 
@@ -146,10 +147,26 @@ class CMM:
 			raise ValueError ("DEV MESSAGE: Argument recording_mode of CMM class set to STILL_IMAGE_MODE, but method record_video was requested.")
 
 
+	# @Brief: Set function for self.recording_mode field.
+	# @Input: recording_mode - new value for recording_mode argument.
+	# @Retrn: None
+	# @Throw: None
+	def set_recording_mode(self, recording_mode):
+		self.recording_mode = recording_mode
+
+
 	# @Brief: Return capture_time which was set for this object. Needs to properly thread capture_still_image method.
 	# @Input: None
-	# @Retrn: self.capture_time
+	# @Retrn: self.capture_timer
 	# @Throw: None
-	def get_capture_time (self):
-		return self.capture_time
+	def get_capture_timer(self):
+		return self.capture_timer
+
+
+	# @Brief: Return recording_mode in order to know which of the methods (for still image or video) can be used by the program.
+	# @Input: None
+	# @Retrn: self.recording_mode
+	# @Throw: None
+	def get_recording_mode(self):
+		return self.recording_mode
 

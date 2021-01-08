@@ -25,6 +25,8 @@ then
 	
 		# Install openALPR library (which will install all the dependencies - openCV, tesseract, leptonica).	
 		bash $PWD2SCRIPT/bsh/install.sh
+		# Remove library data created during installation process.
+		rm -rf openalpr
 
 		# Python dependencies.
 		python3 -m pip install wolk-connect
@@ -36,6 +38,7 @@ then
 
 		# Create a system variable to know install process has been completed.
 		export LPLTDT
+		export LC_ALL=C		# Remove !strcmp(locale, "C") error.
 	fi
 
 elif [[ --setup == $USERCMD ]]

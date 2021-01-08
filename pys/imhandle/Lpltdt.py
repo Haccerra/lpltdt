@@ -3,11 +3,11 @@
 
 # Import license plate detection library.
 from openalpr import Alpr as alpr
-from vehicleclassifier import VehicleClassifier as alprvc
+#from vehicleclassifier import VehicleClassifier as alprvc
 
 
 class Lpltdt:
-	
+
 	# @Brief: Class constructor.
 	# @Attrb: imsource       - list of all image data provided by CMM module.
 	# 	: alpr_result_no - number of results given by ALPR for specific image.
@@ -27,7 +27,7 @@ class Lpltdt:
 
 
 		# Check for proper types.
-		if (False == isinstance (imsource, list):
+		if (False == isinstance (imsource, list)):
 			raise TypeError ("DEV MESSAGE: Argument imsource of class Lpltdt expected to get a list, but got %s."%str(type(imsource)))
 		if (0 == len(imsource)):
 			raise TypeError ("DEV MESSAGE: Argument imsource of class Lpltdt cannot be empty.")
@@ -42,15 +42,18 @@ class Lpltdt:
 
 
 		# Create alpr object. Normally, parameters alpr_destination and alpr_runtime should not be changed from the input default values.
-		self.alpr = alpr(country, alpr_destination, alpr_runtime)
+		self.alpr = alpr(alpr_country, alpr_config, alpr_runtime)
 
 		# Check if vehicle classifier should be created.
-		self.vclass = alprvc(alpr_destination, alpr_runtime)
+		#self.vclass = alprvc(alpr_config, alpr_runtime)
 
 		# Check if ALPR could be instantialised.
+		"""
 		if (False == self.alpr.is_loaded()):
 			raise TypeError ("DEV MESSAGE: ALPR could not be properly instantialised. Most likely alpr_country object is not appropriate.")
+		"""
 		# Check if VehicleClassifier could be instantialised.
+		"""
 		if (False == self.vclass.is_loaded()):
 			if (False == self.alpr_vehicle):
 				# It was not requested to create vehicle classifier.
@@ -58,6 +61,7 @@ class Lpltdt:
 			else:
 				# It was requested to create vehicle classifier, but the operation failed.
 				raise TypeError ("DEV MESSAGE: ALPR VehicleClassifier could not be properly instantialised. Reason unknown.")
+		"""
 
 		# Check if alpr_result_no argument is actually int.
 		if (False == isinstance(alpr_result_no, int)):
@@ -73,12 +77,6 @@ class Lpltdt:
 	# @Retrn: None
 	# @Throw: None
 	def selfdestroy (self):
-		# Unload ALPR objects from memory.
-		if (False != self.alpr.is_loaded()):
-			self.alpr.unload()
-		if (False != self.vclass.is_loaded()):	
-			self.vclass.unload()
-
 		# Remove self.
 		del self
 
@@ -92,18 +90,18 @@ class Lpltdt:
 		# Method return value.
 		implates = []
 
-		for image in imsource:
+		for image in self.imsource:
 			alpr_result = self.alpr.recognize_ndarray (image) # Get result from image data passed as numpy array.
 
 			# Check if any plate has been found.
 			if (0 != len(alpr_result["results"])):
 				for id, plates in enumerate(alpr_result["results"]):
 					# First candidate is always candidate with highest probability. There is no planned use for rest of the candidates.
-					best_candidate = plates["candidates"][id]					
-					implates.append ( [image, best_candidate["plate"], best_candidate["confidence"] )	# Store the image and license plate found data.
+					best_candidate = plates["candidates"][id]
+					implates.append ( [image, best_candidate["plate"], best_candidate["confidence"]] )	# Store the image and license plate found data.
 
 					# For loop is used for generic solution, but currently only the best candidate is planned. Functionally same as:
-					#	bast_candidate = alpr_result["results"]["candidates"][0]					
+					#	bast_candidate = alpr_result["results"]["candidates"][0]
 					break
 			else:
 				implates.append ( [None, None, None] )	# Nothing found on the image, therefore the image is irrelevant.
@@ -115,7 +113,8 @@ class Lpltdt:
 	# @Input: None
 	# @Retrn: imcar - list of cars found on a processed image.
 	# @Throw: None
-	def vehicle_classify(self)		
+	"""
+	def vehicle_classify(self):
 
 		# Method return value.
 		imcar = []
@@ -127,17 +126,35 @@ class Lpltdt:
 				# Find best car candidate.
 				best_candidate = None
 				for attribute, candidates in vehicle_results.items():
-    					for candidate in candidates:
-						if ("missing" == candidate["name"])
+					for candidate in candidates:
+						if ("missing" == candidate["name"]):
 							imcar.append ( [None, None, None] )
 						else:
 							imcar.append ( [imcar, attribute, candidate] )
+			return imcar
 
 		else:
 			raise ValueError ("DEV MESSAGE: Vehicle Classification method from Lpltdt class requested while alpr_vehicle attribute is set to False.")
+	"""
 
 
+	# @Brief: Set new image source list.
+	# @Input: list of image data array
+	# @Retrn: None
+	# @Throw: TypeError
+	def set_new_image_source(self, imsource):
+		if (False == isinstance (imsource, list)):
+			raise TypeError ("DEV MESSAGE: Instance imsource passed to set_new_image_source method of class Lpltdt is not a list.")
 
+		self.imsource = imsource
+
+
+	# @Brief: Check if vehicle classification has been requested.
+	# @Input: None
+	# @Retrn: self.alpr_vehicle
+	# @Throw: None
+	def get_is_vehicle_classification_set(self):
+		return self.alpr_vehicle
 
 
 

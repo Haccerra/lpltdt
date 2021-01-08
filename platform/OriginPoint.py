@@ -21,6 +21,8 @@ sys.path.insert (0, "%s/platform/sensors"%absolute_path)
 sys.path.insert (0, "%s/database/parser"%absolute_path)
 sys.path.insert (0, "%s/pys"%absolute_path)
 sys.path.insert (0, "%s/pys/exec"%absolute_path)
+sys.path.insert (0, "%s/pys/imhandle"%absolute_path)
+sys.path.insert (0, "%s/config"%absolute_path)
 
 
 # Set aboslute path of database files.
