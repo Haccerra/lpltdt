@@ -49,6 +49,13 @@ then
 	echo lpltdt alias configured.
 	echo "********************************************************************************************************"
 
+elif [[ --editor == $USERCMD ]]
+then
+	# Start resident database editing program.
+	chmod +x $PWD2SCRIPT/pys/residenteditor.py
+	python3 $PWD2SCRIPT/pys/residenteditor.py $PWD2SCRIPT $2
+	chmod -x $PWD2SCRIPT/pys/residenteditor.py
+
 elif [[ --help == $USERCMD ]]
 then
 	echo "********************************************************************************************************"
@@ -60,6 +67,7 @@ then
 	echo -e "\t" --setup   "\t" optional step which adds lpltdt alias to be used instead of bash omnirun.sh command";"
 	echo -e "\t" --start   "\t" start the program";"
 	echo -e "\t" --calib   "\t" allows program parameters to be calibrated to change program behaviour in an easy way";"
+	echo -e "\t" --editor  "\t" start resident editor subprogram";"
 	echo -e "\t" --demo    "\t" presentation mode enabled. "\n\n"
 	echo To run the program execute omnirun.sh script in either of the two following ways:
 	echo -e "\t" bash omnirun.sh [OPTION]
