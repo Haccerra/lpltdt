@@ -2,9 +2,11 @@
 
 
 import os
+import datetime
 import cv2 as cv
 import CMM as cmm
 import Lpltdt as lpltdt
+import DBResidentEditor as dbresidents
 
 
 # @Brief: Demonstrate algorithm basic operation.
@@ -53,13 +55,42 @@ def demoflow():
 				image.append (camera.record_video())
 
 			elif ("process" == user_command):
+				db = dbresidents.DBResidentEditor(os.getcwd () + "/database/residents.db")
+
+				try:
+					data = db.read()
+
+				except Exception:
+					print ("DEV MESSAGE: Could not open the database at %s path."%(os.getcwd () + "/database/residents.db"))
+					os.exit (1)
+
 				if (0 != len(image)):
 
 					try:
 						lpalgo.set_new_image_source(image)
 						result = lpalgo.lp_process()
 
-						print (result[0][1])
+
+						belongs_to_resident = False
+						for entry in data:
+							if (entry[dbresidents.RESIDENT_CAR_LICENSE] == result[0][1]):
+								print ("\033[1m\033[36mLOG: \033[93m%s:%s:%s \033[91m%s %s\033[0m entered the garage (car data: \033[1m\033[95m%s %s %s\033[0m)" 	\
+									%(									\
+										datetime.datetime.now ().hour,					\
+										datetime.datetime.now ().minute,				\
+										datetime.datetime.now ().second,				\
+										entry[dbresidents.RESIDENT_NAME],				\
+										entry[dbresidents.RESIDENT_SURNAME],				\
+										entry[dbresidents.RESIDENT_CAR_BRAND],				\
+										entry[dbresidents.RESIDENT_CAR_MODEL],				\
+										entry[dbresidents.RESIDENT_CAR_LICENSE]				\
+									 )									\
+								      )
+								belongs_to_resident = True
+
+						if (False == belongs_to_resident):
+							print ("\033[1m\033[91mNo resident could be found with\033[93m %s \033[91mlicense plate registration.\033[0m"%result[0][1])
+
 
 					except Exception:
 						print ("Could not process the bufferred image.")
