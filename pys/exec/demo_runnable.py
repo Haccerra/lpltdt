@@ -4,6 +4,7 @@
 import os
 import datetime
 import cv2 as cv
+import numpy as np
 import CMM as cmm
 import Lpltdt as lpltdt
 import DBResidentEditor as dbresidents
@@ -45,7 +46,7 @@ def demoflow():
 				image = []
 
 				camera.set_recording_mode(cmm.STILL_IMAGE_MODE)
-				image.append (camera.capture_still_image())
+				image.append (np.asarray (camera.capture_still_image())) 
 
 			elif ("captvid" == user_command):
 				# Clear image list
@@ -69,7 +70,6 @@ def demoflow():
 					try:
 						lpalgo.set_new_image_source(image)
 						result = lpalgo.lp_process()
-
 
 						belongs_to_resident = False
 						for entry in data:
@@ -103,7 +103,7 @@ def demoflow():
 
 					try:
 						for im in image:
-							cv.imshow ("imgshow", im)
+							cv.imshow ("imgshow", cv.rotate(im, cv.ROTATE_180))
 							cv.waitKey (0)
 					except Exception:
 						print ("No image could be shown.")

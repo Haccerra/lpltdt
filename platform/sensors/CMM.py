@@ -5,8 +5,8 @@
 import picamera
 import picamera.array
 import time
-import PIL   as Pillow
 import numpy as np
+import cv2   as cv
 
 
 # Possible values for recording mode argument of the class.
@@ -98,7 +98,12 @@ class CMM:
 
 			# Rotate the image if needed.
 			if (0 != self.image_rotation):
-				image = Pillow.Image.fromarray(np.asarray (image)).rotate(self.image_rotation, expand = True)
+				if (+180 == abs(self.image_rotation)):
+					image = cv.rotate (image, cv.ROTATE_180)
+				if (-90  == self.image_rotation):
+					image = cv.rotate (image, cv.ROTATE_90_COUNTERCLOCKWISE)
+				if (+90  == self.image_rotation):
+					image = cv.rotate (image, cv.ROTATE_90)
 
 			return image
 
@@ -130,7 +135,12 @@ class CMM:
 
 				# Rotate the image, if needed.
 				if (0 != self.image_rotation):
-					image = Pillow.Image.fromarray(np.asarray (image)).rotate(self.image_rotation, expand = True)
+					if (+180 == abs(self.image_rotation)):
+						image = cv.rotate (image, cv.ROTATE_180)
+					if (-90  == self.image_rotation):
+						image = cv.rotate (image, cv.ROTATE_90_COUNTERCLOCKWISE)
+					if (+90  == self.image_rotation):
+						image = cv.rotate (image, cv.ROTATE_90)
 
 				image_array.append (image)		# Store new frame.
 				rawdata.truncate(0)			# Clear streamed data.

@@ -51,3 +51,28 @@ class IoT:
 			raise ValueError ("WARNING: Request to disconnect from the platform given prior to connection request.")
 
 
+	# @Brief:
+	# @Input:
+	# @Retrn:
+	# @Throw:
+	def send_camera_readings(self, tplTime, tplResident):
+
+		# Create logging data.
+		log_data = 											\
+		"""
+		Garage access entry:  %s/%s/%s at %s:%s:%s.
+		Resident information: %s %s from %s apartment.
+		"""												\
+			%(											\
+				tplTime[0], tplTime[1], tplTime[2], tplTime[3], tplTime[4], tplTime[5],		\
+				tplResident[0], tplResident[1], tplResident[2]					\
+			)
+
+		# Device must exist.
+		if (None != self.device):
+			self.device.add_sensor_reading("CAM", log_data)			# Send data to cloud.
+			self.device.publish ()
+
+		else:
+			raise Exception ("Improper sequence. Device not connected.")
+

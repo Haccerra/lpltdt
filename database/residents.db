@@ -9,60 +9,67 @@
 
 				
 
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Marko
-					resident_surname=Majkic
-					resident_apartment=14
+					resident_name=Djura
+					resident_surname=Jaksic
+					resident_apartment=A13
 					resident_car_brand=Opel
-					resident_car_model=Corsa D
-					resident_car_license=BO001ZD
+					resident_car_model=Astra
+					resident_car_license=BG1952SF
 				END NEW RESIDENT DATA BLOCK
 
 				
 
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Mira
-					resident_surname=Skoric
-					resident_apartment=85
-					resident_car_brand=Volkswagen
-					resident_car_model=Golf
-					resident_car_license=KG102MJ
+					resident_name=Dositej
+					resident_surname=Obradovic
+					resident_apartment=B15
+					resident_car_brand=Zastava
+					resident_car_model=Scala
+					resident_car_license=BG1465RK
 				END NEW RESIDENT DATA BLOCK
 
 				
 
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Milos
-					resident_surname=Kovac
-					resident_apartment=17
-					resident_car_brand=Skoda
-					resident_car_model=Rapid
-					resident_car_license=NS488ZG
-				END NEW RESIDENT DATA BLOCK
-
-				
-
-
-				
-
-				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Tatjana
-					resident_surname=Sestic
-					resident_apartment=29
-					resident_car_brand=Kia
-					resident_car_model=Sportage
-					resident_car_license=PP030DG
+					resident_name=Desanka
+					resident_surname=Maksimovic
+					resident_apartment=C6
+					resident_car_brand=Peugeot
+					resident_car_model=208
+					resident_car_license=NG033LI
 				END NEW RESIDENT DATA BLOCK
 
 				
 
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Petar
-					resident_surname=Petrovic
-					resident_apartment=90
-					resident_car_brand=Dacia
-					resident_car_model=Logan
-					resident_car_license=KM017FL
+					resident_name=Ljubivoje
+					resident_surname=Rsumovic
+					resident_apartment=G17
+					resident_car_brand=Citroen
+					resident_car_model=C3
+					resident_car_license=KL011MV
 				END NEW RESIDENT DATA BLOCK
 
 				
