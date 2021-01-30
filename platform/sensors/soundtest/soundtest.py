@@ -7,9 +7,9 @@ import sys
 absolute_path = os.getcwd ()
 
 
-sys.path.insert (0, "%s/platform"%absolute_path)
-sys.path.insert (0, "%s/platform/sensors"%absolute_path)
-sys.path.insert (0, "%s/platform/sensors/soundtest"%absolute_path)
+sys.path.insert (0, "%s"%absolute_path)
+sys.path.insert (0, "%s"%absolute_path)
+sys.path.insert (0, "%s/soundtest"%absolute_path)
 
 
 from SSM import *

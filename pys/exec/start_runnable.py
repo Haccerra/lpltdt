@@ -6,12 +6,15 @@ import sys
 import time
 import threading
 import datetime
+import cv2 as cv
 import IoT as wolkabout
 import CMM as cmm
+import SSM as ssm
 import Lpltdt as lpltdt
 import DBResidentEditor as dbresidents
 
 
+illegal_access_id = 1
 list_of_residents_already_in_building = []
 
 
@@ -34,9 +37,15 @@ def workflow(program_absolute_path, program_database_absolute_path):
 		while (True):
 			# Start taking camera images.
 			if (cmm.STILL_IMAGE_MODE == camera.get_recording_mode()):
-				time.sleep (camera.get_capture_timer())			# Delay capturing new image untill requested time passes. Sleep preferred to active threading.
+				while (ssm.get_sound_sensor_gio()):
+					pass						# Wait untill sound sensor reacts.
+
+				#time.sleep (camera.get_capture_timer())		# Delay capturing new image untill requested time passes. Sleep preferred to active threading.
 				lstImageData = camera.capture_still_image()
 			else:
+				while (ssm.get_sound_sensor_gio()):
+					pass
+
 				lstImageData = camera.record_video()
 
 			# Try to find license plate.
@@ -58,7 +67,7 @@ def workflow(program_absolute_path, program_database_absolute_path):
 						# Write resident to table.
 						resident_status = False
 						for id, resident in enumerate (list_of_residents_already_in_building):
-							if (resident == lstAlgoResult[0][1]:
+							if (resident == lstAlgoResult[0][1]):
 								resident_status = [True, id]
 
 						if (False != resident_status[0]):
@@ -66,7 +75,36 @@ def workflow(program_absolute_path, program_database_absolute_path):
 						else:
 							list_of_residents_already_in_building.append (lstAlgoResult[0][1])		# Resident entered the building.
 
-						print ("Access allowed for %s resident."%lstAlgoResult[0][1])		# Print license plates.
+						print ("Access allowed for %s resident."%lstAlgoResult[0][1])				# Print license plates.
+
+						# Create directory for a specific resident using Apartment_NameSurname (if it does not exist already).
+						try:
+							resident_directory = "savedata/%s_%s%s" %(found_status[0][9], found_status[0][7], found_status[0][8])
+							os.mkdir ("%s" %resident_directory)
+
+						except OSError as error:
+							pass		# Directory already exists.
+
+						finally:
+
+							# Create directory for specific day where all images from that day will be stored for a given resident.
+							try:
+								current_day = "%s_%s_%s" %(found_status[0][1], found_status[0][2], found_status[0][3])
+								os.mkdir ("%s/%s" %(resident_directory, current_day))
+
+							except OSError as error:
+								pass	# Directory already exists.
+
+							finally:
+								# Create an image.
+								imname = "%s:%s:%s" %(found_status[0][4], found_status[0][5], found_status[0][6])
+								impath = "%s/%s/%s" %(resident_directory, current_day, imname)
+
+								if (cmm.STILL_IMAGE_MODE == camera.get_recording_mode()):
+									cv.imwrite ("%s"%impath, lstImageData)		# Still image mode only records a single element (not a list).
+								else:
+									cv.imwrite ("%s"%impath, lstImageData[0])	# First image from a video.
+
 
 						# Send information to IoT platform.
 						iot_connection.send_camera_readings( 				\
@@ -84,10 +122,46 @@ def workflow(program_absolute_path, program_database_absolute_path):
 									found_status[0][9]			\
 								      )						\
 						)
+						iot_connection.send_sound_readings(				\
+							tplTime     = (						\
+									found_status[0][1],			\
+									found_status[0][2],			\
+									found_status[0][3],			\
+									found_status[0][4],			\
+									found_status[0][5],			\
+									found_status[0][6],			\
+								      ),					\
+							imname      = impath					\
+						)
 
 					else:
 						if (None != lstAlgoResult[0][1]):
 							print ("Illegal entry for %s license plates. Access prohibited."%lstAlgoResult[0][1])
+
+							# Save image.
+							impath = "savedata/illegal/%s" %(str(illegal_access_id))
+
+							if (cmm.STILL_IMAGE_MODE == camera.get_recording_mode()):
+								cv.imwrite ("%s"%impath, lstImageData)		# Still image mode only records a single element (not a list).
+							else:
+								cv.imwrite ("%s"%impath, lstImageData[0])	# First image from a video.
+
+							illegal_access_id = illegal_access_id + 1
+
+							# Send data to cloud.							
+							iot_connection.send_sound_readings_illegal_access (	\
+								tplTime = (					\
+										found_status[0][1],		\
+										found_status[0][2],		\
+										found_status[0][3],		\
+										found_status[0][4],		\
+										found_status[0][5],		\
+										found_status[0][6],		\
+									  )					\
+								lplt    = lstAlgoResult[0][1],			\
+								imname  = impath				\
+							)
+
 
 			# Try to do vehicle classification (if set).
 			"""

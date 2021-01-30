@@ -59,14 +59,12 @@ then
 elif [[ --help == $USERCMD ]]
 then
 	echo "********************************************************************************************************"
-	echo Welcome to LPLTDT program. To use the program, following [OPTION] are applicable:"\n"
+	echo -e Welcome to LPLTDT program. To use the program, following [OPTION] are applicable:"\n"
 	echo -e "\t" --install "\t" sets up the environment needed for program to work";"
-	echo -e "\t" --remove  "\t" removes all the packages installed through --install process";"
-	echo -e "\t" --destroy "\t" completely removes all files from the project";"
-	echo -e "\t" --memfree "\t" removes testdata to save the space on drive.
+	echo -e "\t" --memfree "\t" removes testdata to save the space on drive "(" not implemented .. use: rm -rf testdata instead ");"
 	echo -e "\t" --setup   "\t" optional step which adds lpltdt alias to be used instead of bash omnirun.sh command";"
 	echo -e "\t" --start   "\t" start the program";"
-	echo -e "\t" --calib   "\t" allows program parameters to be calibrated to change program behaviour in an easy way";"
+	echo -e "\t" --calib   "\t" allows program parameters to be calibrated to change program behaviour in an easy way "(" not implemented in this version of release ");"
 	echo -e "\t" --editor  "\t" start resident editor subprogram";"
 	echo -e "\t" --demo    "\t" presentation mode enabled. "\n\n"
 	echo To run the program execute omnirun.sh script in either of the two following ways:
