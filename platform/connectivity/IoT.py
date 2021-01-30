@@ -1,13 +1,18 @@
 # !/env/bin/python3
 # Connect to wolk platform.
 
+
 # Libraries
+import os
 import wolk
+import json
+import time
 
 
 # Varibles
 from SecurityInfo import SECURITY_KEY, SECURITY_PASSWORD
 
+configurations = {}
 
 # Device status values used to distinguish whether connection has been established.
 DEVICE_CONNECTED    = 0
@@ -35,13 +40,28 @@ class IoT:
 	# @Input: None
 	# @Retrn: None
 	# @Throw: None
-	def establish_connection(self):
-		# Establish connection and store the data.		
+	def establish_connection(self, config = "platform/connectivity/manifest"):
+		# Establish connection and store the data.
 		self.device = wolk.WolkConnect (												\
 						    device = wolk.Device (key = self.platform_key, password = self.platform_password),		\
 						    host = self.host,										\
-						    port = self.port										\
+						    port = self.port,										\
 					       )
+		"""
+		try:
+			global configurations
+
+			with open("%s/platform/connectivity/manifest/configurations.json"%config) as fh:
+				configurations = json.load(fh)
+			
+
+		except Exception:
+			print ("Could not open %s/platform/connectivity/manifest/configurations.json"%config)
+			exit (1)
+
+		wolk.logging_config(configurations["LL"])  # Log level
+		"""
+
 		self.device.connect()
 
 
@@ -64,6 +84,8 @@ class IoT:
 	# @Throw: Exception - method requested prior to connection with cloud.
 	def send_camera_readings(self, tplTime, tplResident):
 
+		global configurations
+
 		# Create logging data.
 		log_data = 											\
 		"""
@@ -79,6 +101,12 @@ class IoT:
 		if (None != self.device):
 			self.device.add_sensor_reading ("CAM", log_data)			# Send data to cloud.
 			self.device.publish ()
+
+			print ("Publishing CAM information to the Cloud: ")
+			print ("%s" %log_data)
+			print ("")
+
+			time.sleep (5)
 
 		else:
 			raise Exception ("Improper sequence. Device not connected.")
@@ -96,7 +124,7 @@ class IoT:
 		"""
 		Sensor triggered at: %s/%s/%s at %s:%s:%s.
 		Camera recorded  im: %s.
-		"""
+		"""												\
 			%(											\
 				tplTime[0], tplTime[1], tplTime[2], tplTime[3], tplTime[4], tplTime[5], 	\
 				imname										\
@@ -106,6 +134,12 @@ class IoT:
 		if (None != self.device):
 			self.device.add_sensor_reading ("SOUND", log_data)			# Send data to cloud.
 			self.device.publish ()
+
+			print ("Publishing SOUND information to CLOUD: ")
+			print ("%s" %log_data)
+			print ("")
+
+			time.sleep (5)
 
 		else:
 			raise Exception ("Improper sequence. Device not connected.")
@@ -125,7 +159,7 @@ class IoT:
 		Illegal registry recorded at:  %s/%s/%s at %s:%s:%s.
 		Camera recorded license plate: %s.
 		Camera recorded path of image: %s.
-		"""
+		"""												\
 			%(											\
 				tplTime[0], tplTime[1], tplTime[2], tplTime[3], tplTime[4], tplTime[5],		\
 				lplt,										\
@@ -136,6 +170,12 @@ class IoT:
 		if (None != self.device):
 			self.device.add_sensor_reading ("SOUND", log_data)
 			self.device.publish ()
+
+			print ("Publishing SOUND information to the Cloud: ")
+			print ("%s" %log_data)
+			print ("")
+
+			time.sleep (5)
 
 		else:
 			raise Exception ("Improper sequence. Device not connected.")

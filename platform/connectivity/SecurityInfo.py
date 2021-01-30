@@ -1,4 +1,4 @@
 # Contains details about pregenerated key and password for IoT platform.
 
-SECURITY_KEY      = "bmojlq4kbiaa7j8u"
-SECURITY_PASSWORD = "3ea9085a-30ac-4222-8f16-43692d05a507"
+SECURITY_KEY      = "j88onf1in2qicbcy"
+SECURITY_PASSWORD = "d9b50eee-741b-45b0-a291-42aa7b2010c8"

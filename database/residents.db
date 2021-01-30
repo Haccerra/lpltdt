@@ -30,46 +30,70 @@
 
 				
 
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Djura
-					resident_surname=Jaksic
-					resident_apartment=A13
-					resident_car_brand=Opel
-					resident_car_model=Astra
-					resident_car_license=BG1952SF
+					resident_name=Marko
+					resident_surname=Markovic
+					resident_apartment=A1
+					resident_car_brand=Mercedes Benz
+					resident_car_model=C200
+					resident_car_license=NS470DD
 				END NEW RESIDENT DATA BLOCK
 
 				
 
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Dositej
-					resident_surname=Obradovic
-					resident_apartment=B15
-					resident_car_brand=Zastava
-					resident_car_model=Scala
-					resident_car_license=BG1465RK
+					resident_name=Miljana
+					resident_surname=Mrcetic
+					resident_apartment=A5
+					resident_car_brand=BMW
+					resident_car_model=Series 3 cabrio
+					resident_car_license=BG1379PV
 				END NEW RESIDENT DATA BLOCK
 
 				
 
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Desanka
-					resident_surname=Maksimovic
-					resident_apartment=C6
+					resident_name=Saban
+					resident_surname=Barcetic
+					resident_apartment=C4
 					resident_car_brand=Peugeot
 					resident_car_model=208
-					resident_car_license=NG033LI
+					resident_car_license=SA024SP
 				END NEW RESIDENT DATA BLOCK
 
 				
 
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Ljubivoje
-					resident_surname=Rsumovic
-					resident_apartment=G17
-					resident_car_brand=Citroen
-					resident_car_model=C3
-					resident_car_license=KL011MV
+					resident_name=Javor
+					resident_surname=Dugic
+					resident_apartment=B17
+					resident_car_brand=Opel
+					resident_car_model=Zafira
+					resident_car_license=NI178OK
 				END NEW RESIDENT DATA BLOCK
 
 				

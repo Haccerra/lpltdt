@@ -91,7 +91,7 @@ class CMM:
 			rawdata = picamera.array.PiRGBArray(self.camera, size = self.camera.resolution)
 			# Make small time window for camera to get ready.
 			time.sleep (0.25)	# 250ms.
-			
+
 			# Fetch the stored data from the camera module.
 			self.camera.capture(rawdata, format = "bgr")	# BGR is legacy format of openCV library used by openALPR.
 			image = rawdata.array

@@ -17,6 +17,7 @@ except Exception:
 # Add program subdirectories to interpreter path.
 sys.path.insert (0, "%s/platform"%absolute_path)
 sys.path.insert (0, "%s/platform/connectivity"%absolute_path)
+sys.path.insert (0, "%s/platform/connectivity/manifest"%absolute_path)
 sys.path.insert (0, "%s/platform/sensors"%absolute_path)
 sys.path.insert (0, "%s/database/parser"%absolute_path)
 sys.path.insert (0, "%s/pys"%absolute_path)

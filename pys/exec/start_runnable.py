@@ -25,16 +25,25 @@ list_of_residents_already_in_building = []
 # @Throw: None
 def workflow(program_absolute_path, program_database_absolute_path):
 
+	global illegal_access_id
+	global list_of_residents_already_in_building
+
 	# Connect to IoT platform.
 	iot_connection = wolkabout.IoT()
-	iot_connection.establish_connection()
+	iot_connection.establish_connection(config = program_absolute_path)
 
 	# Create work objects.
-	camera = cmm.CMM(tplResolution = (1376, 768), image_rotation = 180)
+	camera = cmm.CMM(image_rotation = 180)
 	lpalgo = lpltdt.Lpltdt([ None ])
 
 	try:
+
+		ssm.configure_sound_sensor()
+
 		while (True):
+			# Eazy way to eliminate long honking sounds.
+			time.sleep (10)
+
 			# Start taking camera images.
 			if (cmm.STILL_IMAGE_MODE == camera.get_recording_mode()):
 				while (ssm.get_sound_sensor_gio()):
@@ -65,15 +74,16 @@ def workflow(program_absolute_path, program_database_absolute_path):
 
 					if (0 != len(found_status)):
 						# Write resident to table.
-						resident_status = False
+						resident_status = []
 						for id, resident in enumerate (list_of_residents_already_in_building):
 							if (resident == lstAlgoResult[0][1]):
-								resident_status = [True, id]
+								resident_status.append ([True, id])
 
-						if (False != resident_status[0]):
-							list_of_residents_already_in_building.remove (resident_status[1])		# Resident left the building.
-						else:
-							list_of_residents_already_in_building.append (lstAlgoResult[0][1])		# Resident entered the building.
+						if (0 != len (resident_status)):
+							if (False != resident_status[0][0]):
+								list_of_residents_already_in_building.remove (resident_status[0][1])		# Resident left the building.
+							else:
+								list_of_residents_already_in_building.append (lstAlgoResult[0][1])		# Resident entered the building.
 
 						print ("Access allowed for %s resident."%lstAlgoResult[0][1])				# Print license plates.
 
@@ -97,7 +107,7 @@ def workflow(program_absolute_path, program_database_absolute_path):
 
 							finally:
 								# Create an image.
-								imname = "%s:%s:%s" %(found_status[0][4], found_status[0][5], found_status[0][6])
+								imname = "%s:%s:%s.jpg" %(found_status[0][4], found_status[0][5], found_status[0][6])
 								impath = "%s/%s/%s" %(resident_directory, current_day, imname)
 
 								if (cmm.STILL_IMAGE_MODE == camera.get_recording_mode()):
@@ -139,7 +149,7 @@ def workflow(program_absolute_path, program_database_absolute_path):
 							print ("Illegal entry for %s license plates. Access prohibited."%lstAlgoResult[0][1])
 
 							# Save image.
-							impath = "savedata/illegal/%s" %(str(illegal_access_id))
+							impath = "savedata/illegal/%s.jpg" %(str(illegal_access_id))
 
 							if (cmm.STILL_IMAGE_MODE == camera.get_recording_mode()):
 								cv.imwrite ("%s"%impath, lstImageData)		# Still image mode only records a single element (not a list).
@@ -148,18 +158,18 @@ def workflow(program_absolute_path, program_database_absolute_path):
 
 							illegal_access_id = illegal_access_id + 1
 
-							# Send data to cloud.							
-							iot_connection.send_sound_readings_illegal_access (	\
-								tplTime = (					\
-										found_status[0][1],		\
-										found_status[0][2],		\
-										found_status[0][3],		\
-										found_status[0][4],		\
-										found_status[0][5],		\
-										found_status[0][6],		\
-									  )					\
-								lplt    = lstAlgoResult[0][1],			\
-								imname  = impath				\
+							# Send data to cloud.
+							iot_connection.send_sound_readings_illegal_access (		\
+								tplTime = (						\
+										datetime.datetime.now ().day,		\
+										datetime.datetime.now ().month,		\
+										datetime.datetime.now ().year,		\
+										datetime.datetime.now ().hour,		\
+										datetime.datetime.now ().minute,	\
+										datetime.datetime.now ().second,	\
+									  ),						\
+								lplt    = lstAlgoResult[0][1],				\
+								imname  = impath					\
 							)
 
 
@@ -185,7 +195,7 @@ def workflow(program_absolute_path, program_database_absolute_path):
 		# Disconnect device from the platform.
 		iot_connection.cancel_connection()
 
-		print ("MSG: Program will not close!")
+		print ("MSG: Program will now close!")
 		exit (0)
 
 
