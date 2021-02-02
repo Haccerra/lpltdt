@@ -13,3 +13,7 @@ sudo apt-get install -y libilmbase-dev libopenexr-dev libgstreamer1.0-dev libavc
 # GUI library.
 sudo apt-get install -y python3-tk
 sudo pip3 install tk
+
+# Wolkabout.
+python3 -m pip install wolk-connect==3.1.0
+

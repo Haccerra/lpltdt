@@ -54,46 +54,89 @@
 
 				
 
-				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Marko
-					resident_surname=Markovic
-					resident_apartment=A1
-					resident_car_brand=Mercedes Benz
-					resident_car_model=C200
-					resident_car_license=NS470DD
-				END NEW RESIDENT DATA BLOCK
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
+
+				
+
 
 				
 
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Miljana
-					resident_surname=Mrcetic
-					resident_apartment=A5
-					resident_car_brand=BMW
-					resident_car_model=Series 3 cabrio
-					resident_car_license=BG1379PV
-				END NEW RESIDENT DATA BLOCK
-
-				
-
-				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Saban
-					resident_surname=Barcetic
-					resident_apartment=C4
+					resident_name=Petar
+					resident_surname=Arandjelovic
+					resident_apartment=L1A1
 					resident_car_brand=Peugeot
-					resident_car_model=208
-					resident_car_license=SA024SP
+					resident_car_model=2008
+					resident_car_license=KŽ015RB
 				END NEW RESIDENT DATA BLOCK
 
 				
 
 				BEGIN NEW RESIDENT DATA BLOCK
-					resident_name=Javor
-					resident_surname=Dugic
-					resident_apartment=B17
-					resident_car_brand=Opel
-					resident_car_model=Zafira
-					resident_car_license=NI178OK
+					resident_name=Stefan
+					resident_surname=Stankovic
+					resident_apartment=L1A5
+					resident_car_brand=Citroen
+					resident_car_model=C5
+					resident_car_license=ŠI116TX
+				END NEW RESIDENT DATA BLOCK
+
+				
+
+				BEGIN NEW RESIDENT DATA BLOCK
+					resident_name=Maja
+					resident_surname=Dobrinic
+					resident_apartment=L2A11
+					resident_car_brand=BMW
+					resident_car_model=3 Cabrio
+					resident_car_license=BG1886JR
+				END NEW RESIDENT DATA BLOCK
+
+				
+
+				BEGIN NEW RESIDENT DATA BLOCK
+					resident_name=Tomislav
+					resident_surname=Jankovic
+					resident_apartment=L2A4
+					resident_car_brand=Skoda
+					resident_car_model=Rapid
+					resident_car_license=NS488ZG
+				END NEW RESIDENT DATA BLOCK
+
+				
+
+				BEGIN NEW RESIDENT DATA BLOCK
+					resident_name=Bratislav
+					resident_surname=Radenkovic
+					resident_apartment=L3A16
+					resident_car_brand=Toyota
+					resident_car_model=Auris
+					resident_car_license=BČ025MA
+				END NEW RESIDENT DATA BLOCK
+
+				
+
+				BEGIN NEW RESIDENT DATA BLOCK
+					resident_name=Simka
+					resident_surname=Jokovic
+					resident_apartment=L1A7
+					resident_car_brand=Renault
+					resident_car_model=Laguna
+					resident_car_license=BG1493RR
 				END NEW RESIDENT DATA BLOCK
 
 				

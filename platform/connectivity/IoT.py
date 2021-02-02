@@ -10,7 +10,7 @@ import time
 
 
 # Varibles
-from SecurityInfo import SECURITY_KEY, SECURITY_PASSWORD
+from SecurityInfo import *
 
 configurations = {}
 
@@ -29,8 +29,8 @@ class IoT:
 	#       : device              - argument of WolkConnect object type
 	def __init__(self, host = "iot-elektronika.ftn.uns.ac.rs", port = 1883):
 		self.connectivity_status = DEVICE_DISCONNECTED
-		self.platform_key        = SECURITY_KEY
-		self.platform_password   = SECURITY_PASSWORD
+		self.platform_key        = FTN_SECURITY_KEY
+		self.platform_password   = FTN_SECURITY_PASSWORD
 		self.device              = None
 		self.host                = host
 		self.port                = port
@@ -42,11 +42,21 @@ class IoT:
 	# @Throw: None
 	def establish_connection(self, config = "platform/connectivity/manifest"):
 		# Establish connection and store the data.
-		self.device = wolk.WolkConnect (												\
-						    device = wolk.Device (key = self.platform_key, password = self.platform_password),		\
-						    host = self.host,										\
-						    port = self.port,										\
-					       )
+		if (-1 != self.host.find ("ftn")):
+			self.device = wolk.WolkConnect (													\
+							    device   = wolk.Device (key = self.platform_key, password = self.platform_password),		\
+							    protocol = wolk.Protocol.JSON_PROTOCOL,								\
+							    host     = self.host,										\
+							    port     = self.port,										\
+					  	       )
+
+		elif (-1 != self.host.find ("demo")):
+			self.device = wolk.WolkConnect ( device   = wolk.Device (key = DEMO_SECURITY_KEY, password = DEMO_SECURITY_PASSWORD) )
+
+		else:
+			print ("Improper host.")
+			exit (1)
+
 		"""
 		try:
 			global configurations
